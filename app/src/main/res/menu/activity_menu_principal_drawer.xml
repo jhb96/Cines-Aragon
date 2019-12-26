@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:title="Perfil"
+            android:id="@+id/nav_perfil"
+            android:name="Soon" />
+        <item
+            android:title="Mis entradas"
+            android:id="@+id/nav_misentradas"
+            android:name="My Watchlish" />
+        <item
+            android:title="Mis favoritas"
+            android:id="@+id/nav_favoritas"
+            android:name="My Favorites" />
+    </group>
+
+    <item android:name="Communicate"
+        android:title="Communicate">
+        <menu>
+            <item
+                android:title="Logout"
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:name="Logout" />
+        </menu>
+    </item>
+
+</menu>

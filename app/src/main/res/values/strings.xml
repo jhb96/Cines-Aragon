@@ -4,5 +4,28 @@
     <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="showtime1">7.30 AM</string>
+    <string name="showtime2">8.30 AM</string>
+    <string name="showtime3">9.30 AM</string>
+    <string name="showtime4">10.30 AM</string>
+    <string name="showtime5">11.30 AM</string>
+
+    <string name="adult">Adult</string>
+    <string name="children">Children</string>
+
+
+    <string-array name="ticketQuantity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
 
 </resources>

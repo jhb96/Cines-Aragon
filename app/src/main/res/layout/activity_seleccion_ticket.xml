@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SeleccionTicketActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="384dp"
+        android:layout_height="53dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/adult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxSeleccionado"
+                android:text="@string/adult"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="53dp" />
+
+            <Spinner
+                android:id="@+id/quantityAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginLeft="@android:dimen/app_icon_size"
+
+                tools:layout_editor_absoluteX="98dp"
+                tools:layout_editor_absoluteY="53dp" />
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <CheckBox
+                android:id="@+id/children"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/children"
+                android:onClick="onCheckboxSeleccionado"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="104dp" />
+
+            <Spinner
+                android:id="@+id/quantityChildren"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginLeft="@android:dimen/app_icon_size"
+                tools:layout_editor_absoluteX="98dp"
+                tools:layout_editor_absoluteY="104dp" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/ticketTypeNext"
+                android:text="Pagar"
+                android:onClick="onPagarButton"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

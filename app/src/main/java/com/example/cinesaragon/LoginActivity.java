@@ -1,14 +1,12 @@
 package com.example.cinesaragon;
 
 import android.os.Bundle;
-
-
-
 import android.view.Menu;
 import android.view.MenuItem;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,16 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

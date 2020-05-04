@@ -1,5 +1,8 @@
 package com.example.cinesaragon;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -91,15 +94,18 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
 
             MarkerOptions markerOptions = new MarkerOptions();
 
+
+            MapsActivity.cinemas[i] = nearbyplaceslist.get(i).get("place_name");
+            Log.d("GetNearbyPLaces", "cinemas" + MapsActivity.cinemas[i]);
+
             HashMap<String, String> googleNearbyPlace = nearbyplaceslist.get(i);
             String nameOfPlace = googleNearbyPlace.get("place_name");
             String vicinity = googleNearbyPlace.get("vicinity");
-            Double rating = Double.parseDouble(googleNearbyPlace.get("rating"));
-
-            Log.d("NearbyCinema", "placename = " + nameOfPlace + "vicinity =" + vicinity + "rating" + rating );
-
+           //double rating = Double.parseDouble(googleNearbyPlace.get("rating"));
             double lat = Double.parseDouble( googleNearbyPlace.get("lat"));
             double lng = Double.parseDouble(googleNearbyPlace.get("lng"));
+
+            Log.d("NearbyCinema", "placename = " + nameOfPlace + "vicinity =" + vicinity );
 
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
@@ -110,5 +116,4 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
             mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
         }
     }
-
 }

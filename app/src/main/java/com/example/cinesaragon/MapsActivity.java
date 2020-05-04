@@ -7,12 +7,19 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -35,6 +42,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -46,13 +54,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String mapKey = "AIzaSyCiMzmMun-pBgyHtezTpxaUJ6TTbm0wsJM";
     double latitude, longitude;
 
+    private String cineElegido;
+
     Location myLocation;
     Location aragonLocation;
 
     private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
-    private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;+
+    private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
 
-    public List<String>
+//    public static HashMap<String, String> cinemas;
+    public static String[] cinemas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +75,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+        final Spinner spinner = findViewById(R.id.cinemas_spinner);
+        Button carteleraButton = findViewById(R.id.button_cartelera);
+
         setUPGClient();
+
+        String [] cinemas_array = new String[4];
+
+        cinemas_array[0] = "Cines Toyac";
+        cinemas_array[1] = "Cines Pepe";
+        cinemas_array[2] = "Cines Ramires";
+        cinemas_array[3] = "Cines Platon";
+
+
+// Spinner de cinemas
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, cinemas_array);
+
+        // Specify the layout to use when the list of choices appears
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(spinnerArrayAdapter);
+
+        View.OnClickListener onCarteleraButtonListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), CarteleraActivity.class);
+
+                i.putExtra("cineElegido", (String) spinner.getSelectedItem());
+                startActivity(i);
+            }
+        };
+
+        carteleraButton.setOnClickListener(onCarteleraButtonListener);
 
     }
 
@@ -80,6 +123,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         googleApiClient.connect();
     }
+
+
 
 
     @Override

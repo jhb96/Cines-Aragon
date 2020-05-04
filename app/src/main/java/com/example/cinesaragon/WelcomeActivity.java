@@ -24,6 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
         Button noLoginButton = findViewById(R.id.accessNoLogin);
 
 
+        // NO LOGIN
         View.OnClickListener nologinButtonListener = new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
@@ -31,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
 
+        // LOGIN
         View.OnClickListener loginButtonListener = new View.OnClickListener() {
 
             public void onClick(View v){
@@ -42,9 +44,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(loginButtonListener);
         noLoginButton.setOnClickListener(nologinButtonListener);
-
-
-
 
 
     }

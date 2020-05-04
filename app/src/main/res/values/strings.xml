@@ -15,7 +15,6 @@
     <string name="adult">Adult</string>
     <string name="children">Children</string>
 
-
     <string-array name="ticketQuantity">
         <item>1</item>
         <item>2</item>

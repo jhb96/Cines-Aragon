@@ -5,12 +5,23 @@ public class Pelicula {
     private String nombre;
     private String genero;
     private String informacion;
+    private String director;
+    private String descripción;
+    private String fechaEstreno;
+    private String duración;
 
 
-    public Pelicula(){
+    public Pelicula(){ }
 
-
+    @Override
+    public String toString(){
+        return "CustomerModel{" +
+                "nombre=" + nombre +
+                ", genero" + genero +
+                ", director" + director + "}";
     }
+
+
 
 
     public String getNombre() {

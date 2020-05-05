@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "679282396930",
+    "firebase_url": "https://cines-aragon-2020.firebaseio.com",
+    "project_id": "cines-aragon-2020",
+    "storage_bucket": "cines-aragon-2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679282396930:android:f5baeec636d4f02ad17c1b",
+        "android_client_info": {
+          "package_name": "com.example.cinesaragon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679282396930-m3i3tgonksrtf8jc9t8o2cm41crk1gps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBof7VZuCrbdsCSoX8t1Xfbues-EzqL1ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679282396930-m3i3tgonksrtf8jc9t8o2cm41crk1gps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,8 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="SIGN IN"
-                android:textSize="30dp"/>
+                android:text="SIGN UP"
+                android:textSize="30dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -30,14 +30,13 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="15dp"
                 android:text="EMAIL ADDRESS"/>
-
             <EditText
-                android:id="@+id/emailText"
+                android:id="@+id/emailRegisterText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
-                android:hint=" example@gmail.com"
+                android:hint=" example@mail.com"
                 android:textColorHint="#b6b6b6"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:inputType="textNoSuggestions"/>
@@ -48,9 +47,8 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="15dp"
                 android:text="PASSWORD"/>
-
             <EditText
-                android:id="@+id/passwordText"
+                android:id="@+id/passwordRegisterText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="16dp"
@@ -58,34 +56,53 @@
                 android:hint=" *********"
                 android:textColorHint="#b6b6b6"
                 android:inputType="textPassword"
-                android:drawableLeft="@drawable/ic_lock"
-                android:paddingBottom="13dp"/>
+                android:paddingBottom="13dp"
+                android:drawableLeft="@drawable/ic_lock" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:text="CONFIRM PASSWORD"/>
+            <EditText
+                android:id="@+id/confirmPWRegisterText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:hint=" *********"
+                android:textColorHint="#b6b6b6"
+                android:inputType="textPassword"
+                android:paddingBottom="13dp"
+                android:drawableLeft="@drawable/ic_lock" />
 
             <Button
-                android:id="@+id/signInButton"
+                android:id="@+id/signUpButtonReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/white"
-                android:text="SIGN IN" />
+                android:text="SIGN UP" />
+
+
+
 
         </LinearLayout>
-
-
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-
         <Button
-            android:id="@+id/signUpButton"
+            android:id="@+id/signInButtonReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="#ffffff"
             android:textSize="10dp"
-            android:textColor="@color/white"
-            android:text="DON'T YOU HAVE AN ACCOUNT YET? REGISTER HERE"
+            android:text="ALREADY HAVE AND ACCOUNT? SIGN IN HERE"
             android:background="#77000000"/>
     </RelativeLayout>
 

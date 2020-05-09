@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.cinesaragon.model.Cine;
+import com.example.cinesaragon.model.Pelicula;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -25,12 +29,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuPrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView unloginedUser;
     private DrawerLayout drawer;
     public static final String PELICULA_NAME ="com.example.thang.assignment2_ticketbuy_SHOWTIME";
+    public static List<Pelicula> jsonMovies = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +48,28 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
         setToolbar();
-
 
 
         if (navigationView != null) {
             // Añadir carácteristicas
         }
+
+
+        cargarPeliculas();
+
+
+
+
         navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
 
         unloginedUser = (TextView) header.findViewById(R.id.unloginedUserEmail);
         unloginedUser.setText("Unknown");
+
+
+
+
 
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -61,20 +78,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
 
 
 
-        ArrayList<Cine> cines= new ArrayList <>();
 
-        //Pruebas
-        Cine cine1 = new Cine("Cine de niños", "cine de niños");
-        Cine cine2 = new Cine("Cine de adultos", "cine de adultos");
-        cines.add(cine1);
-        cines.add(cine2);
-
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<Cine> adapter = new ArrayAdapter<Cine>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, cines);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
 
 
 //        FloatingActionButton fab = findViewById(R.id.fab);
@@ -117,6 +121,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
                 Intent i = new Intent(this, MapsActivity.class);
                 startActivity(i);
 
+
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
@@ -125,6 +130,13 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void cargarPeliculas(){
+
+
+
+
+    }
 
 
     private void setToolbar() {

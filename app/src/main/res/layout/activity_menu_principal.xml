@@ -10,25 +10,6 @@
     tools:openDrawer="start">
 
 
-    <Button
-        android:id="@+id/button_comprar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onComprarEntradasClick"
-        android:text="Comprar Entradas" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="16dp"
-        android:spinnerMode="dropdown"
-        android:gravity="center_vertical"
-        android:popupBackground="#EAEAEA"
-        android:textColor="#54a4db"
-        />
-
 
     <!-- Contenido Principal -->
 
@@ -37,11 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!--include layout="@layout/mainactivitydesign/ -->
+        <include layout="@layout/mainactivitydesign" />
 
 
     <!-- Menú Deslizante -->
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -51,10 +31,6 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_menu_principal_drawer"
         app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/black" >
-
-
-    </com.google.android.material.navigation.NavigationView>
-
+        app:itemTextColor="@color/black" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

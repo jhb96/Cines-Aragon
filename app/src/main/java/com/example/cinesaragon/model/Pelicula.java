@@ -6,12 +6,19 @@ public class Pelicula {
     private String genero;
     private String informacion;
     private String director;
+
+
+
     private String descripción;
     private String fechaEstreno;
     private String duración;
 
+    public Pelicula(){}
 
-    public Pelicula(){ }
+    public Pelicula(String nombre){
+        this.nombre = nombre;
+
+    }
 
     @Override
     public String toString(){
@@ -48,4 +55,36 @@ public class Pelicula {
         this.informacion = informacion;
     }
 
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getDescripción() {
+        return descripción;
+    }
+
+    public void setDescripción(String descripción) {
+        this.descripción = descripción;
+    }
+
+    public String getFechaEstreno() {
+        return fechaEstreno;
+    }
+
+    public void setFechaEstreno(String fechaEstreno) {
+        this.fechaEstreno = fechaEstreno;
+    }
+
+    public String getDuración() {
+        return duración;
+    }
+
+    public void setDuración(String duración) {
+        this.duración = duración;
+    }
 }

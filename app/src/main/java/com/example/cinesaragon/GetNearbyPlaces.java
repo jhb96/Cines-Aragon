@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.example.cinesaragon.model.Cine;
+import com.example.cinesaragon.model.Pelicula;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +16,8 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
+
 
 
     private String googlePlaceData;
@@ -56,6 +61,11 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
             JSONObject parentObject = new JSONObject(s);
             JSONArray resultArray = parentObject.getJSONArray("results");
 
+            // Initializate bbdd
+
+            DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
+            // Recorro cada cine y creo una marca y los guardo en la bbdd
             for(int i=0; i<resultArray.length(); i++){
                 JSONObject jsonObject = resultArray.getJSONObject(i);
                 JSONObject locationObj = jsonObject.getJSONObject("geometry").getJSONObject("location");
@@ -66,8 +76,20 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
                 JSONObject nameObject = resultArray.getJSONObject(i);
 
                 String name = nameObject.getString("name");
-
                 LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+
+                String address = jsonObject.getString("formatted_address");
+
+
+                // Write cinema in the Firebase
+                Cine cine = new Cine(name,address,"", "", latLng.latitude, latLng.longitude);
+                cine.addPelicula(new Pelicula("Peli1"));
+                cine.addPelicula(new Pelicula("Peli2"));
+                cine.addPelicula(new Pelicula("Peli3"));
+
+
+                db.child("Cines").child(cine.getNombre()).setValue(cine);
+
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(name);
@@ -76,6 +98,7 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
                 mMap.addMarker(markerOptions);
 
             }
+
         } catch (JSONException e ){
             e.printStackTrace();
         }
@@ -89,14 +112,12 @@ public class GetNearbyPlaces extends AsyncTask<Object, String , String> {
     }
 
 
+
+
     private void DisplayNearbyPlaces(List<HashMap<String, String>> nearbyplaceslist){
         for(int i=0; i < nearbyplaceslist.size(); i++){
 
             MarkerOptions markerOptions = new MarkerOptions();
-
-
-            MapsActivity.cinemas[i] = nearbyplaceslist.get(i).get("place_name");
-            Log.d("GetNearbyPLaces", "cinemas" + MapsActivity.cinemas[i]);
 
             HashMap<String, String> googleNearbyPlace = nearbyplaceslist.get(i);
             String nameOfPlace = googleNearbyPlace.get("place_name");

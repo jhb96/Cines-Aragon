@@ -18,7 +18,7 @@ public class DownloadUrl {
 
 
         try {
-                     URL url = new URL(placeURL);
+            URL url = new URL(placeURL);
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.connect();
 

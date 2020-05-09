@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.cinesaragon.model.Cine;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -40,6 +41,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,8 +68,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
     private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
 
-//    public static HashMap<String, String> cinemas;
-    public static String[] cinemas;
+//  public static HashMap<String, String> cinemas;
+    public static List<Cine> cinemas;
+    public static String[] cinemas_array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +81,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         final Spinner spinner = findViewById(R.id.cinemas_spinner);
         Button carteleraButton = findViewById(R.id.button_cartelera);
 
         setUPGClient();
 
-        String [] cinemas_array = new String[4];
+        System.out.println("CARGAR CINES");
+//        loadCinemas();
 
-        cinemas_array[0] = "Cines Toyac";
-        cinemas_array[1] = "Cines Pepe";
-        cinemas_array[2] = "Cines Ramires";
-        cinemas_array[3] = "Cines Platon";
+        System.out.println(" HOLA ?");
 
+//        Log.i("Cinemas array", cinemas_array[0] + cinemas_array[1]);
+        String [] cinemas_array2 = new String[]{"Pepe","Luis"};
 
 // Spinner de cinemas
 
@@ -111,6 +117,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public static void loadCinemas(){
+        final FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = db.getReference("Cines");
+        cinemas = new ArrayList<>();
+
+        // Attach a listener to read the data at our posts reference
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int size = (int) dataSnapshot.getChildrenCount();
+                System.out.println("sise" + size);
+                int i = 0;
+
+                cinemas_array = new String[size];
+                //use the for loop here to step over each child and retrieve data
+                for (DataSnapshot cineSnapshot : dataSnapshot.getChildren()){
+                    Cine cine = cineSnapshot.getValue(Cine.class);
+                    cinemas.add(cine);
+                    cinemas_array[i] = cine.getNombre();
+                    System.out.println("namess" + cinemas_array[i]);
+                    i++;
+//                    Log.i("Load Cinemas", cine.toString());
+                    System.out.println("Cine " + cine.getNombre() + " dirección " +  cine.getDireccion());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     private void setUPGClient(){
 
@@ -161,7 +199,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            markerOptions.title("you");
 //            mMap.addMarker(markerOptions);
 //
-            getNearByCinemas();
+//            getNearByCinemas();
 //        }
 
     }
@@ -282,8 +320,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng zgz = new LatLng(41.656, -0.87734);
 
         //mMap.addMarker(new MarkerOptions().position(aragon).title("Marker in Aragon"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(zgz));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zgz, 13.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(aragon));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(aragon, 13.0f));
 
 //        getNearByCinemas();
 //        MarkerOptions markerOptions = new MarkerOptions();

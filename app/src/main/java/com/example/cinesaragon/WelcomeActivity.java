@@ -10,19 +10,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cinesaragon.model.Cine;
+import com.example.cinesaragon.model.Pelicula;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
     private String email;
     private String password;
 
@@ -33,13 +44,24 @@ public class WelcomeActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        MapsActivity.loadCinemas();
 
-        if(mAuth.getCurrentUser() != null){
-            FirebaseAuth.getInstance().signOut();
-            //startActivity(new Intent(getApplicationContext(), MenuPrincipalActivity.class));
-            //finish();
+        // Initialize Firebase Auth
+//        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Write a message to the database
+        if (currentUser != null) {
+//            Cine cine2 = new Cine("Cine2", "Calle Invent -1Z", "", "De 4 a 4:01", 23.1, 12.4);
+//            cine2.addPelicula(new Pelicula("Dos tontos muy tontos"));
+//
+//        // Write a message to the database
+//            DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+//
+//            db.child("Cines").child(cine2.getNombre()).setValue(cine2);
+
+            startActivity(new Intent(getApplicationContext(), MenuPrincipalActivity.class));
+            finish();
         }
 
         Button loginButton = findViewById(R.id.signInWelcome);
@@ -50,7 +72,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // NO LOGIN
         View.OnClickListener nologinButtonListener = new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
+                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(i);
             }
         };
@@ -65,7 +87,7 @@ public class WelcomeActivity extends AppCompatActivity {
         };
 
         // REGISTER
-        View.OnClickListener regiseterButtonListener = new View.OnClickListener() {
+        View.OnClickListener registerButtonListener = new View.OnClickListener() {
 
             public void onClick(View v){
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -76,7 +98,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(loginButtonListener);
         noLoginButton.setOnClickListener(nologinButtonListener);
-        registerButton.setOnClickListener(regiseterButtonListener);
+        registerButton.setOnClickListener(registerButtonListener);
 
     }
 

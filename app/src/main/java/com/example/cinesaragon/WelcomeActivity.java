@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cinesaragon.model.Cine;
 import com.example.cinesaragon.model.Pelicula;
+import com.example.cinesaragon.requestOperators.LoadCinemaOperator;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -43,7 +44,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         FirebaseApp.initializeApp(this);
-
         MapsActivity.loadCinemas();
 
         // Initialize Firebase Auth
@@ -52,16 +52,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Write a message to the database
         if (currentUser != null) {
-//            Cine cine2 = new Cine("Cine2", "Calle Invent -1Z", "", "De 4 a 4:01", 23.1, 12.4);
-//            cine2.addPelicula(new Pelicula("Dos tontos muy tontos"));
-//
-//        // Write a message to the database
-//            DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-//
-//            db.child("Cines").child(cine2.getNombre()).setValue(cine2);
-
-            startActivity(new Intent(getApplicationContext(), MenuPrincipalActivity.class));
-            finish();
+//            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//            finish();
         }
 
         Button loginButton = findViewById(R.id.signInWelcome);

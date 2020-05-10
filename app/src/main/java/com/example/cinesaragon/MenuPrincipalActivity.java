@@ -38,6 +38,8 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     public static final String PELICULA_NAME ="com.example.thang.assignment2_ticketbuy_SHOWTIME";
     public static List<Pelicula> jsonMovies = new ArrayList<>();
 
+    private FirebaseAuth firebaseAuth;
+
 
 
     @Override
@@ -50,16 +52,14 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setToolbar();
 
+        firebaseAuth=FirebaseAuth.getInstance();
+
 
         if (navigationView != null) {
             // Añadir carácteristicas
         }
 
-
         cargarPeliculas();
-
-
-
 
         navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
@@ -68,34 +68,37 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         unloginedUser.setText("Unknown");
 
 
-
-
-
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
-
-
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+
+        int id = menuItem.getItemId();
+        Intent i = new Intent();
+
+        switch(id){
+            case R.id.nav_perfil:
+                break;
+
+            case R.id.nav_misentradas:
+                break;
+
+            case R.id.nav_favoritas:
+                break;
+
+            case R.id.nav_logout:
+                firebaseAuth.signOut();
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
+
+        }
+        return true;
     }
 
 

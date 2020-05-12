@@ -53,7 +53,7 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
     private movieObj publication;
 
     private boolean gotDetails=false;
-
+    private String imgPath;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbFavorites;
@@ -100,14 +100,7 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 ////                watchYoutubeVideo(publication.getVideoList().get(0).getKey());
 //            }
 //        });
-        buyTicketButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ComprarEntradasActivity.class);
-                startActivity(i);
 
-            }
-        });
 
         castAdapter = new castListAdapter(this,castList);
         castLv.setAdapter(castAdapter);
@@ -117,7 +110,7 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         movieName.setText(item.getTitle());
         setTitle(item.getTitle().toUpperCase());
 
-        String imgPath = "https://image.tmdb.org/t/p/w780"+item.getBackdrop_path();
+        imgPath = "https://image.tmdb.org/t/p/w780"+item.getBackdrop_path();
 
         Glide.with(getApplicationContext())
                 .load(imgPath)
@@ -130,6 +123,17 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         else{
             movieRate.setText("-/10");
         }
+
+        buyTicketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ComprarEntradasActivity.class);
+                i.putExtra("movieName", movieName.getText());
+                i.putExtra("imageMoviePath", imgPath);
+                startActivity(i);
+
+            }
+        });
 
 //        addFavorites.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override

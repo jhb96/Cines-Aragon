@@ -52,8 +52,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Write a message to the database
         if (currentUser != null) {
-//            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-//            finish();
+            startActivity(new Intent(getApplicationContext(), MenuPrincipalActivity.class));
+            finish();
         }
 
         Button loginButton = findViewById(R.id.signInWelcome);
@@ -64,7 +64,7 @@ public class WelcomeActivity extends AppCompatActivity {
         // NO LOGIN
         View.OnClickListener nologinButtonListener = new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                Intent i = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(i);
             }
         };

@@ -20,11 +20,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoPeliActivity"></activity>
+        <activity android:name=".PerfilActivity"></activity>
+        <activity android:name=".MisEntradasActivity" />
+        <activity android:name=".RealizarPagoActivity" />
+        <activity android:name=".InfoPeliActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CarteleraActivity" />
         <activity android:name=".SeleccionTicketActivity" />
+        <activity android:name=".ComprarEntradasActivity" />
+        <activity android:name=".MapsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,13 +50,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SeleccionAsientoActivity" />
-        <activity
-            android:name=".ComprarEntradasActivity"
-            android:label="ComprarEntradasActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="@string/title_activity_menu_principal"

@@ -208,7 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location){
         myLocation = location;
 
-        //setAragonLocation();
+        setAragonLocation();
 //        if(myLocation != null){
 //            latitude = location.getLatitude();
 //            longitude = location.getLongitude();

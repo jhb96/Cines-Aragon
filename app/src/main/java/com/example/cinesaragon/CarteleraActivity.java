@@ -52,8 +52,6 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
         String nameCine = intent.getStringExtra("cineElegido");
         this.setTitle(nameCine);
 
-
-
         jsonMovies.clear();
         nextPageJsonMovies.clear();
         publications.clear();
@@ -103,8 +101,11 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
     }
 
     private void sendRequest(String page){
-//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/now_playing?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=release_date.asc&language=es&page="+page+"&region=ES";
-        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/now_playing?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=popularity.desc&page="+page;
+//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=release_date.asc&language=es&page="+page+"&region=ES";
+//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page;
+        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page+"&region=ES";
+
+//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/now_playing?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=popularity.desc&page="+page;
         movieRequestOperator ro= new movieRequestOperator();
         ro.setListener(this);
         ro.start();

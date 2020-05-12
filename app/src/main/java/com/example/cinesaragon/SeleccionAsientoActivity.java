@@ -11,6 +11,8 @@ public class SeleccionAsientoActivity extends AppCompatActivity {
 
     //Class variables
     String _movieName, _showTime, _adultQuan, _childrenQuan;
+    private String timeChoosen;
+    private int  ticketAdult, ticketChildren, ticketYoung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +20,20 @@ public class SeleccionAsientoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seleccion_asiento);
 
 
-        //get intent and content
-        Intent intent=getIntent();
-        _movieName = intent.getStringExtra(MenuPrincipalActivity.PELICULA_NAME);
-        _showTime = intent.getStringExtra(ComprarEntradasActivity.SHOW_TIME);
-        _adultQuan = intent.getStringExtra(SeleccionTicketActivity.TICKET_ADULT);
-        _childrenQuan = intent.getStringExtra(SeleccionTicketActivity.TICKET_CHILDREN);
+        Intent i = getIntent();
+
+        timeChoosen = i.getStringExtra("timeChoosen");
+        ticketAdult = i.getIntExtra("adultTicket", 0);
+        ticketChildren = i.getIntExtra("childrenTicket", 0);
+        ticketYoung = i.getIntExtra("youngTicket", 0);
+
+
+
+
 
         //Get the TextViews from layout
+
+
 
 
     }

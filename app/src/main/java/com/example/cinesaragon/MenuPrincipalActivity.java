@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
 
     private TextView unloginedUser;
     private DrawerLayout drawer;
+    private Button button;
+
     public static final String PELICULA_NAME ="com.example.thang.assignment2_ticketbuy_SHOWTIME";
     public static List<Pelicula> jsonMovies = new ArrayList<>();
 
@@ -48,8 +51,8 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         setContentView(R.layout.activity_menu_principal);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         setToolbar();
 
         firebaseAuth=FirebaseAuth.getInstance();
@@ -93,7 +96,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
 
             case R.id.nav_logout:
                 firebaseAuth.signOut();
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, WelcomeActivity.class));
                 finish();
                 break;
 
@@ -112,7 +115,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     }
 
     public void onComprarEntradasClick(View v){
-        Intent i = new Intent(this, ComprarEntradasActivity.class);
+        Intent i = new Intent(this, MapsActivity.class);
         startActivity(i);
 
     }

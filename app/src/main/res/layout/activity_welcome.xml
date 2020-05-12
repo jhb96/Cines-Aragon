@@ -5,32 +5,16 @@
     android:background="#000">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <LinearLayout
-        android:id="@+id/cinemindLogo"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp" />
-
-        <TextView
-            android:layout_marginTop="5dp"
+            android:id="@+id/image_cines"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CINES ARAGÓN"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"/>
-    </LinearLayout>
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/cines_aragon" />
 
 
     <RelativeLayout

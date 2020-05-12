@@ -1,69 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context = ".ComprarEntradasActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="342dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="12sp"/>
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="7dp"/>
+
+            <ImageView
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="7dp"
+                android:background="#E8E8E8"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginRight="0dp"
+                android:layout_height="45dp"
+                android:layout_alignLeft="@+id/divider2"
+                android:layout_alignBottom="@+id/divider2"
+                android:background="#76000000"/>
+
+            <TextView
+                android:id="@+id/movieDetailTitle"
+                android:layout_marginBottom="14dp"
+                android:layout_width="250dp"
+                android:layout_height="25dp"
+                android:layout_alignLeft="@+id/divider2"
+                android:layout_alignBottom="@+id/divider2"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="MOVIE NAME"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/movieDetailDirector"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/divider2"
+                android:layout_alignBottom="@+id/divider2"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:text="by #unknown"
+                android:textColor="#ffffff" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/divider2"
+                android:background="#E8E8E8"/>
 
 
-    <RadioGroup
-        android:layout_width="150dp"
-        android:layout_height="204dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="240dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/divider2">
 
-        <RadioButton
-            android:id="@+id/showTime1"
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/chooseTime"
+                    android:textColor="@color/black"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="5dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/showTime1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="17:30"
+                    android:textSize="22sp"
+                    android:onClick="onSelectTimeClick"/>
+
+                <RadioButton
+                    android:id="@+id/showTime2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:text="19:30"
+                    android:onClick="onSelectTimeClick"/>
+
+                <RadioButton
+                    android:id="@+id/showTime3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="22sp"
+                    android:text="21:30"
+                    android:onClick="onSelectTimeClick"/>
+
+            </RadioGroup>
+
+
+            <ImageView
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_below="@+id/radioGroup"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#E8E8E8"/>
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider3"
+            android:layout_marginTop="5dp"
+            android:text="@string/chooseType"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/black"
+            android:paddingTop="5dp"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@id/divider3"
+            android:layout_marginTop="50dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/adult"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:onClick="onCheckboxSeleccionado"
+                android:text="@string/adult" />
+
+            <Spinner
+                android:id="@+id/quantityAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="@android:dimen/app_icon_size" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/divider3"
+        android:layout_marginTop="100dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_weight="1">
+
+        <CheckBox
+            android:id="@+id/children"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="7:30"
-            android:onClick="onComprarEntradasClick"/>
+            android:textSize="20sp"
+            android:text="@string/children"
+            android:onClick="onCheckboxSeleccionado" />
 
-        <RadioButton
-            android:id="@+id/showTime2"
+        <Spinner
+            android:id="@+id/quantityChildren"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="8:30" android:onClick="onComprarEntradasClick" />
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:layout_marginLeft="@android:dimen/app_icon_size" />
 
-        <RadioButton
-            android:id="@+id/showTime3"
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/divider3"
+        android:layout_marginTop="150dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_weight="1">
+
+        <CheckBox
+            android:id="@+id/carnetJoven"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="9:30" android:onClick="onComprarEntradasClick" />
+            android:onClick="onCheckboxSeleccionado"
+            android:textSize="20sp"
+            android:text="@string/young" />
 
-        <RadioButton
-            android:id="@+id/showTime4"
+        <Spinner
+            android:id="@+id/quantityJoven"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="10:30" android:onClick="onComprarEntradasClick" />
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:layout_marginLeft="@android:dimen/app_icon_size" />
+    </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/showTime5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="11:30" android:onClick="onComprarEntradasClick" />
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="350dp"
+        android:onClick="onComprarClick"
+        android:text="Continue" />
+</RelativeLayout>
 
-    </RadioGroup>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>

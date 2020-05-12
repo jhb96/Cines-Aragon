@@ -13,14 +13,13 @@ import android.widget.TextView;
 public class SeleccionTicketActivity extends AppCompatActivity {
 
     //declare fields
-    String _movieName=null, _showTime=null;
+    private String movieName, showTime;
 
     //Declare 2 spinner
-    Spinner _spinner1=null;
-    Spinner _spinner2=null;
+    private Spinner spinner1,spinner2;
 
     //Store ticket quantity
-    String _adultQuan, _childrenQuan;
+    private String _adultQuan, _childrenQuan;
 
     //Keys for Intent putExtra()
     public static final String TICKET_ADULT = "com.example.thang.assignment2_TICKET_ADULT";
@@ -34,32 +33,28 @@ public class SeleccionTicketActivity extends AppCompatActivity {
 
 
         //Get intent and its content
-        Intent intent=getIntent();
-        _movieName = intent.getStringExtra(MenuPrincipalActivity.PELICULA_NAME);
-        _showTime = intent.getStringExtra(ComprarEntradasActivity.SHOW_TIME);
+        Intent intent = getIntent();
+        movieName = intent.getStringExtra(MenuPrincipalActivity.PELICULA_NAME);
+        showTime = intent.getStringExtra(ComprarEntradasActivity.SHOW_TIME);
 
         //Display movie name and show time in the TextView
-        TextView textView=(TextView)findViewById(R.id.textView3);
-        textView.setText("You select "
-                + _movieName
-                + " and show time at "
-                + _showTime
-                +".\nPlease select ticket types and quantity.");
+        TextView textView = findViewById(R.id.textView3);
+        textView.setText("Please, select ticket type and quantity");
 
 
         //Create Spinner and populate data
-        _spinner1 = (Spinner) findViewById(R.id.quantityAdult);
-        _spinner2 = (Spinner) findViewById(R.id.quantityChildren);
+        spinner1 = findViewById(R.id.quantityAdult);
+        spinner2 = findViewById(R.id.quantityChildren);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.ticketQuantity, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        _spinner1.setAdapter(adapter);
-        _spinner1.setEnabled(false); //Disable the spinner after created
-        _spinner2.setAdapter(adapter);
-        _spinner2.setEnabled(false);//Disable spinner
+        spinner1.setAdapter(adapter);
+        spinner1.setEnabled(false); //Disable the spinner after created
+        spinner2.setAdapter(adapter);
+        spinner2.setEnabled(false);//Disable spinner
 
 
     }
@@ -73,15 +68,15 @@ public class SeleccionTicketActivity extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.adult:
                 if (checked)
-                    _spinner1.setEnabled(true); //enable spinner if check box is checked
+                    spinner1.setEnabled(true); //enable spinner if check box is checked
                 else
-                    _spinner1.setEnabled(false);
+                    spinner1.setEnabled(false);
                 break;
             case R.id.children:
                 if (checked)
-                    _spinner2.setEnabled(true);
+                    spinner2.setEnabled(true);
                 else
-                    _spinner2.setEnabled(false);
+                    spinner2.setEnabled(false);
                 break;
 
         }
@@ -91,17 +86,17 @@ public class SeleccionTicketActivity extends AppCompatActivity {
     public void onPagarButton(View view){
 
         //Get selected value (quantity) from spinners
-        if (_spinner1.isEnabled()){
-            _adultQuan= _spinner1.getSelectedItem().toString();
+        if (spinner1.isEnabled()){
+            _adultQuan= spinner1.getSelectedItem().toString();
         }
-        if (_spinner2.isEnabled()){
-            _childrenQuan = _spinner2.getSelectedItem().toString();
+        if (spinner2.isEnabled()){
+            _childrenQuan = spinner2.getSelectedItem().toString();
         }
 
         //create intent to pass data
-        Intent intent=new Intent(this, SeleccionAsientoActivity.class);
-        intent.putExtra(MenuPrincipalActivity.PELICULA_NAME, _movieName);
-        intent.putExtra(ComprarEntradasActivity.SHOW_TIME, _showTime);
+        Intent intent=new Intent(this, RandomActivity.class);
+        intent.putExtra(MenuPrincipalActivity.PELICULA_NAME, movieName);
+        intent.putExtra(ComprarEntradasActivity.SHOW_TIME, showTime);
         if (_adultQuan!=null)
             intent.putExtra(SeleccionTicketActivity.TICKET_ADULT, _adultQuan);
         else

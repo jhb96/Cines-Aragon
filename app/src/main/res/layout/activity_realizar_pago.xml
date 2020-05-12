@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
+
+    <TextView
+        android:id="@+id/resumen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/summary_pay"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:id="@+id/adultTickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resumen"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/childrenTicket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adultTickets"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/youngTicket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/childrenTicket"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/totalCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/youngTicket"
+        android:textStyle="bold"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp" />
+
+
+    <ImageView
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:layout_below="@+id/totalCost"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="#E8E8E8"/>
+
+
+    <TextView
+        android:id="@+id/fill_user_data_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fill_data"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_below="@id/divider3"
+        android:layout_marginTop="0dp"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fill_user_data_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:autofillHints="Nombre"
+        android:hint="Nombre"
+        android:textColorHint="@color/quantum_grey" />
+
+    <EditText
+        android:id="@+id/edit_text_surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_name"
+        android:hint="Apellidos"/>
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_surname"
+        android:hint="Email"/>
+
+
+    <Button
+        android:id="@+id/pay_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_email"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/pay_button_text"
+        android:layout_marginTop="100dp" />
+
+
+</RelativeLayout>

@@ -6,14 +6,25 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="showtime1">7.30 AM</string>
-    <string name="showtime2">8.30 AM</string>
-    <string name="showtime3">9.30 AM</string>
-    <string name="showtime4">10.30 AM</string>
-    <string name="showtime5">11.30 AM</string>
+    <string name="intro">¡Bienvenido a Cines Aragón!\n Aquí podrás comprar tus entradas en cualquier cine de Aragón.</string>
+    <string name="intro2">¡Compra una entrada!</string>
+    <string name="showtime1">17.30</string>
+    <string name="showtime2">19.30</string>
+    <string name="showtime3">21.30</string>
 
-    <string name="adult">Adult</string>
-    <string name="children">Children</string>
+    <string name="chooseTime">Please, choose the time:</string>
+    <string name="chooseType">And choose the tickets:</string>
+
+
+    <string name="fill_data">Rellene sus datos para finalizar</string>
+    <string name="summary_pay">Resumen de la compra</string>
+
+    <string name="pay_button_text">Pagar</string>
+
+    <string name="adult">Adulto</string>
+    <string name="children">Niño</string>
+    <string name="young">Carnét Joven</string>
+
 
     <string-array name="ticketQuantity">
         <item>1</item>

@@ -9,6 +9,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +36,7 @@ import java.util.List;
 
 public class MenuPrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView unloginedUser;
+    private TextView userEmail;
     private DrawerLayout drawer;
     private Button button;
 
@@ -42,6 +44,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     public static List<Pelicula> jsonMovies = new ArrayList<>();
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
 
 
@@ -53,22 +56,28 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView =  findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        userEmail = header.findViewById(R.id.userEmail);
+
+
         setToolbar();
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        System.out.println("Email" + currentUser.getEmail());
+        if(currentUser != null) {
+            userEmail.setText(currentUser.getEmail());
+        } else {
+            userEmail.setText("Usuario invitado");
 
-        if (navigationView != null) {
-            // Añadir carácteristicas
         }
 
         cargarPeliculas();
 
         navigationView.setNavigationItemSelectedListener(this);
-        View header=navigationView.getHeaderView(0);
 
-        unloginedUser = (TextView) header.findViewById(R.id.unloginedUserEmail);
-        unloginedUser.setText("Unknown");
+
 
 
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,17 +91,25 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         int id = menuItem.getItemId();
-        Intent i = new Intent();
+        Intent i;
 
         switch(id){
+
             case R.id.nav_perfil:
+                i = new Intent(this, PerfilActivity.class);
+                startActivity(i);
                 break;
 
             case R.id.nav_misentradas:
+                i = new Intent(this, MisEntradasActivity.class);
+                startActivity(i);
                 break;
 
             case R.id.nav_favoritas:
+                i = new Intent(this, MisEntradasActivity.class);
+                startActivity(i);
                 break;
+
 
             case R.id.nav_logout:
                 firebaseAuth.signOut();
@@ -123,10 +140,11 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_perfil:
-                Intent i = new Intent(this, MapsActivity.class);
-                startActivity(i);
-
+//
+//            case R.id.search_button:
+//                Intent myIntent=new Intent(this,searchMovie.class);
+//                startActivity(myIntent);
+//                break;
 
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);

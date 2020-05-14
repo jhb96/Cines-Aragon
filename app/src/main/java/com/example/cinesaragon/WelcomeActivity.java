@@ -46,12 +46,15 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         MapsActivity.loadCinemas();
 
+
+
         // Initialize Firebase Auth
 //        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Write a message to the database
         if (currentUser != null) {
+            MisEntradasActivity.loadEntradas();
             startActivity(new Intent(getApplicationContext(), MenuPrincipalActivity.class));
             finish();
         }

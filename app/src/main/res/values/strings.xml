@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Cines Aragón</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,8 +11,8 @@
     <string name="showtime2">19.30</string>
     <string name="showtime3">21.30</string>
 
-    <string name="chooseTime">Please, choose the time:</string>
-    <string name="chooseType">And choose the tickets:</string>
+    <string name="chooseTime">Por favor, escoja una hora: </string>
+    <string name="chooseType">Y elija las entradas: </string>
 
 
     <string name="fill_data">Rellene sus datos para finalizar</string>
@@ -24,6 +23,13 @@
     <string name="adult">Adulto</string>
     <string name="children">Niño</string>
     <string name="young">Carnét Joven</string>
+
+    <string name="action_movie_filter">Acción</string>
+    <string name="drama_movie_filter">Drama</string>
+    <string name="comedy_movie_filter">Comedia</string>
+    <string name="romance_movie_filter">Romance</string>
+    <string name="horror_movie_filter">Terror</string>
+    <string name="thriller_movie_filter">Thriller</string>
 
 
     <string-array name="ticketQuantity">

@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="55dp"
         android:nestedScrollingEnabled="true">
 
 
@@ -265,7 +267,7 @@
                 android:id="@+id/buyTicket_button"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Buy Ticket"
+                android:text="Comprar entrada"
                 android:layout_below="@+id/castListView"
                 android:layout_centerHorizontal="true"
                 />

@@ -13,16 +13,18 @@ public class Ticket {
     private String tipo;
     private double coste;
     private String fecha;
+    private String cine;
 
 
 
     public Ticket(){}
 
-    public Ticket(String userID, String nombre, String pelicula, String tipo, double coste, String fecha){
+    public Ticket(String userID, String nombre, String pelicula, String cine, String tipo, double coste, String fecha){
         this.userID = userID;
         this.nombre = nombre;
         this.pelicula = pelicula;
         this.tipo = tipo;
+        this.cine = cine;
         this.coste = coste;
         this.fecha = fecha;
 
@@ -75,5 +77,13 @@ public class Ticket {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getCine() {
+        return cine;
+    }
+
+    public void setCine(String cine) {
+        this.cine = cine;
     }
 }

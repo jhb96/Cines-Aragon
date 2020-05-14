@@ -2,8 +2,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.cinesaragon.RandomActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/drama_movies"
+        android:title="@string/drama_movie_filter"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_movies"
+        android:title="@string/action_movie_filter"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/comedy_movies"
+        android:title="@string/comedy_movie_filter"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/thriller_movies"
+        android:title="@string/thriller_movie_filter"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/terror_movies"
+        android:title="@string/horror_movie_filter"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/romance_movies"
+        android:title="@string/romance_movie_filter"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

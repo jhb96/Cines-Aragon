@@ -26,7 +26,9 @@
         <activity android:name=".InfoPeliActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".CarteleraActivity" />
+        <activity android:name=".CarteleraActivity"
+            android:label="CarteleraActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".SeleccionTicketActivity" />
         <activity android:name=".ComprarEntradasActivity" />
         <activity android:name=".MapsActivity" />

@@ -13,7 +13,7 @@
         android:id="@+id/img_header_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_exit_to_app_black_24dp"
+        android:src="@drawable/cines_palomitas"
         android:scaleType="fitXY"/>
 
     <ImageView
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/img_header_bg"
         android:layout_alignLeft="@+id/img_header_bg"
-        android:background="#4c000000"
+        android:background="@color/colorAccent"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -37,23 +37,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="CINEMIND"
+            android:text="CINES ARAGÓN"
             android:textSize="21dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/website"
-            android:text="Movie Reminder"
+            android:text="Venta de entradas"
             android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/unloginedUserEmail"
+            android:id="@+id/userEmail"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logined as: -"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

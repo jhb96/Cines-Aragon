@@ -1,19 +1,26 @@
 package com.example.cinesaragon;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 import com.example.cinesaragon.Adapter.movieListAdapterMainPage;
 import com.example.cinesaragon.model.movieObj;
 import com.example.cinesaragon.requestOperators.movieRequestOperator;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +36,7 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
 
     public static int clickedMovie;
     public static List<movieObj> jsonMovies = new ArrayList<>();
+    private int genre;
 
     private List<movieObj> nextPageJsonMovies = new ArrayList<>();
 
@@ -36,7 +44,7 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
 
     Context thiscontext;
 
-    public static boolean sorted=false,loadingMore=false;
+    public static boolean sorted=false,loadingMore=false, filter=false;
 
     private int queryCurrentPage =0;
 
@@ -46,17 +54,19 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartelera);
 
+
+        setToolbar();
+        setTitle("Cartelera");
         thiscontext = this;
 
         Intent intent = getIntent();
-        String nameCine = intent.getStringExtra("cineElegido");
-        this.setTitle(nameCine);
+        final String nameCine = intent.getStringExtra("cineElegido");
 
-        jsonMovies.clear();
-        nextPageJsonMovies.clear();
-        publications.clear();
 
-        moviesLv =(ListView) findViewById(R.id.soonListView);
+        filter=false;
+        resetVars();
+
+        moviesLv = findViewById(R.id.soonListView);
 
         soonAdapter = new movieListAdapterMainPage(thiscontext, jsonMovies);
 
@@ -67,6 +77,7 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 clickedMovie = jsonMovies.get(i).getId();
                 Intent intent = new Intent(getApplicationContext(), InfoPeliActivity.class);
+                intent.putExtra("cinema", nameCine);
                 startActivity(intent);
 
             }
@@ -80,15 +91,28 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
 
+
+
                 int lastInScreen = firstVisibleItem + visibleItemCount;
                 if((lastInScreen == totalItemCount) && !loadingMore){
                     loadingMore=true;
                     queryCurrentPage++;
-                    sendRequest(String.valueOf(queryCurrentPage));
+                    if(filter){
+                        sendFilterRequest(String.valueOf(queryCurrentPage));
+                    } else{
+                        sendRequest(String.valueOf(queryCurrentPage));
+                    }
                 }
             }
         });
 
+    }
+
+    private void resetVars() {
+        jsonMovies.clear();
+        nextPageJsonMovies.clear();
+        publications.clear();
+        queryCurrentPage = 0;
     }
 
     public void addListItemToAdapter(List<movieObj> list){
@@ -102,14 +126,30 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
 
     private void sendRequest(String page){
 //        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=release_date.asc&language=es&page="+page+"&region=ES";
-//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page;
-        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page+"&region=ES";
+        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page;
+//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/upcoming?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=es-ES&page="+page+"&region=ES";
 
 //        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/movie/now_playing?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=popularity.desc&page="+page;
         movieRequestOperator ro= new movieRequestOperator();
         ro.setListener(this);
         ro.start();
+    }
 
+    private void sendFilterRequest(String page){
+//        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/genre/"+genre+"/movies?api_key=21f9b30c3b2a6a1e906d03a384132fda&sort_by=created_at.desc&page="+page;
+        movieRequestOperator.urlToRequest="https://api.themoviedb.org/3/discover/movie?api_key=21f9b30c3b2a6a1e906d03a384132fda&language=en-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page="+page+"&with_genres="+genre;
+        movieRequestOperator ro= new movieRequestOperator();
+        ro.setListener(this);
+        ro.start();
+
+    }
+
+    private void setToolbar() {
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public void updatePublication(){
@@ -161,6 +201,99 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.drama_movies:
+                resetVars();
+                genre = 18;
+                filter=true;
+                queryCurrentPage=1;
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+
+            case R.id.action_movies:
+                resetVars();
+                genre = 28;
+                filter=true;
+                queryCurrentPage=1;
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+
+            case R.id.comedy_movies:
+                resetVars();
+                genre = 35;
+                filter=true;
+                queryCurrentPage=1;
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+
+            case R.id.romance_movies:
+                resetVars();
+                genre = 10749;
+                filter=true;
+                queryCurrentPage=1;
+                System.out.println("Genre search");
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+            case R.id.thriller_movies:
+                resetVars();
+                genre = 53;
+                filter=true;
+                queryCurrentPage=1;
+                System.out.println("Genre search");
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+
+                case R.id.terror_movies:
+                resetVars();
+                genre = 27;
+                filter=true;
+                queryCurrentPage=1;
+                System.out.println("Genre search");
+                sendFilterRequest(String.valueOf(queryCurrentPage++));
+                break;
+
+            case android.R.id.home:
+                finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+//    public void filterByGenre(){
+//        runOnUiThread(new Runnable() {
+//          @Override
+//          public void run() {
+//              List < movieObj > list_filtered = new ArrayList<>();
+//              System.out.println("Size" + jsonMovies.size());
+//              for (movieObj movie : jsonMovies){
+//                  for(int i =0; i< movie.getGenres().size(); i++){
+//                      if(movie.getGenres().get(i).getTitle() == "Drama"){
+//                          list_filtered.add(movie);
+//                      }
+//                  }
+//              }
+//              jsonMovies.clear();
+//              addListItemToAdapter(list_filtered);
+//          }
+//      });
+//
+//    }
+
+
+
     @Override
     public void success(List<movieObj> publications) {
         this.publications =  publications;
@@ -174,4 +307,5 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
         updatePublication();
 
     }
+
 }

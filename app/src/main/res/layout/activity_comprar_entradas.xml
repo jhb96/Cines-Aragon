@@ -14,10 +14,8 @@
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_alignParentStart="true"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="7dp"
-                android:background="#E8E8E8"/>
+                android:layout_marginBottom="7dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,12 +52,6 @@
                 android:text="by #unknown"
                 android:textColor="#ffffff" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/divider2"
-                android:background="#E8E8E8"/>
 
 
             <LinearLayout
@@ -77,8 +69,8 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/chooseTime"
                     android:textColor="@color/black"
+                    android:text="@string/chooseTime"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
                     android:paddingTop="5dp"
@@ -100,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="17:30"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:onClick="onSelectTimeClick"/>
 
                 <RadioButton
@@ -108,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:text="19:30"
                     android:onClick="onSelectTimeClick"/>
 
@@ -117,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:text="21:30"
                     android:onClick="onSelectTimeClick"/>
 
@@ -127,7 +119,7 @@
             <ImageView
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
-                android:layout_height="13dp"
+                android:layout_height="5dp"
                 android:layout_below="@+id/radioGroup"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
@@ -145,7 +137,7 @@
             android:paddingRight="25dp"
             android:textColor="@color/black"
             android:paddingTop="5dp"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="350dp"
@@ -162,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:onClick="onCheckboxSeleccionado"
                 android:text="@string/adult" />
 
@@ -189,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="@string/children"
             android:onClick="onCheckboxSeleccionado" />
 
@@ -219,7 +211,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:onClick="onCheckboxSeleccionado"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="@string/young" />
 
         <Spinner

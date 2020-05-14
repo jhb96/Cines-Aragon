@@ -1,10 +1,12 @@
 package com.example.cinesaragon;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -50,10 +52,10 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
     private List<movieObj> recMovies=new ArrayList<>();
 
 
-    private movieObj publication;
+    private movieObj publication, item;
 
     private boolean gotDetails=false;
-    private String imgPath;
+    private String imgPath,cinema, director;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbFavorites;
@@ -67,6 +69,9 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 
         setContentView(R.layout.activity_info_peli);
 //
+        setToolbar();
+
+
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(myToolbar);
 
@@ -101,14 +106,16 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 //            }
 //        });
 
+        Intent i = getIntent();
+        cinema = i.getStringExtra("cinema");
 
         castAdapter = new castListAdapter(this,castList);
         castLv.setAdapter(castAdapter);
 
 
-        movieObj item = movieObj.getMovieByID(CarteleraActivity.jsonMovies, CarteleraActivity.clickedMovie);
+        item = movieObj.getMovieByID(CarteleraActivity.jsonMovies, CarteleraActivity.clickedMovie);
         movieName.setText(item.getTitle());
-        setTitle(item.getTitle().toUpperCase());
+        setTitle("Información de la película");
 
         imgPath = "https://image.tmdb.org/t/p/w780"+item.getBackdrop_path();
 
@@ -128,8 +135,10 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ComprarEntradasActivity.class);
-                i.putExtra("movieName", movieName.getText());
+                i.putExtra("movieName", item.getTitle());
                 i.putExtra("imageMoviePath", imgPath);
+                i.putExtra("director", director);
+                i.putExtra("cinema",cinema);
                 startActivity(i);
 
             }
@@ -208,7 +217,6 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 //            }
 //        });
 
-
     }
 
 
@@ -270,7 +278,7 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 
                     movieGenres.setText(genresOfMovie);
 
-                    String director="";
+                    director="";
 
                     for(int i=0;i<publication.getCrewList().size();i++){
                         if(publication.getCrewList().get(i).getJob().equals("Director") && director==""){
@@ -331,7 +339,20 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 
     }
 
+    private void setToolbar() {
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void success(movieObj publication) {

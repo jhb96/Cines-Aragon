@@ -21,7 +21,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:navigationIcon="@drawable/ic_exit_to_app_black_24dp"
-            app:name="CINEMIND" />
+            app:name="Cines Aragón" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

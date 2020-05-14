@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 
 public class ComprarEntradasActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private TextView textView,movieTitleTextView, directorView;
     private ImageView movieImageView;
     private Button continueButton;
     //Declare 2 spinner
@@ -27,8 +27,8 @@ public class ComprarEntradasActivity extends AppCompatActivity {
 
     public static final String SHOW_TIME ="com.example.thang.assignment2_ticketbuy_SHOWTIME";
     private String movieName= "Ejemplo"; //store movie name to transfer to other activity
-    private String imgPath;
-    private String timeChoosen;
+    private String imgPath,timeChoosen,cinema,director;
+
     private int  ticketAdult, ticketChildren, ticketYoung;
 
     @Override
@@ -36,7 +36,7 @@ public class ComprarEntradasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprar_entradas);
 
-        this.setTitle("BUY TICKETS");
+        this.setTitle("Compra de entrada");
 
         //get the Intent that started this activity and get the movie name string
        // Intent intent = getIntent();
@@ -44,6 +44,9 @@ public class ComprarEntradasActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.textView2);
         movieImageView = findViewById(R.id.movieImage);
+        movieTitleTextView = findViewById(R.id.movieDetailTitle);
+        directorView = findViewById(R.id.movieDetailDirector);
+
         continueButton = findViewById(R.id.continueButton);
         spinner1 = findViewById(R.id.quantityAdult);
         spinner2 = findViewById(R.id.quantityChildren);
@@ -52,13 +55,17 @@ public class ComprarEntradasActivity extends AppCompatActivity {
         Intent i = getIntent();
         movieName = i.getStringExtra("movieName");
         imgPath = i.getStringExtra("imageMoviePath");
+        cinema = i.getStringExtra("cinema");
+        director = i.getStringExtra("director");
         //Capture the TextView and display movie name
 
         Glide.with(getApplicationContext())
                 .load(imgPath)
                 .into(movieImageView);
 
-        textView.setText("Please, choose an hour");
+        textView.setText("Por favor, escoja una hora: ");
+        movieTitleTextView.setText(movieName);
+        directorView.setText(director);
 
 
 
@@ -144,7 +151,7 @@ public class ComprarEntradasActivity extends AppCompatActivity {
         i.putExtra("childrenTickets", ticketChildren);
         i.putExtra("youngTickets", ticketYoung);
         i.putExtra("movieName", movieName);
-
+        i.putExtra("cinema",cinema);
         startActivity(i);
 
     }

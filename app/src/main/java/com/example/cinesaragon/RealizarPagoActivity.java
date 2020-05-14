@@ -36,7 +36,7 @@ public class RealizarPagoActivity extends AppCompatActivity {
 
     private int adult, children, young;
     private double cost;
-    private String uId, nombre_completo, movieName, time;
+    private String uId, nombre_completo, movieName, time, cinema;
 
 
     private List<Ticket> tickets;
@@ -60,6 +60,7 @@ public class RealizarPagoActivity extends AppCompatActivity {
         pay_button = findViewById(R.id.pay_button);
 
 
+
         summary();
 
         pay_button.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,7 @@ public class RealizarPagoActivity extends AppCompatActivity {
                 saveTicketOnFirebase();
                 tickets.clear();
 
+                MisEntradasActivity.loadEntradas();
                 Toast.makeText(getApplicationContext(),"Accede a tus entradas para ver tu entrada",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuPrincipalActivity.class);
                 startActivity(i);
@@ -83,6 +85,7 @@ public class RealizarPagoActivity extends AppCompatActivity {
     private void summary(){
 
         Intent i = getIntent();
+        cinema = i.getStringExtra("cinema");
         time = i.getStringExtra("timeChoosen");
         adult =  i.getIntExtra("adultTickets", 0);
         children = i.getIntExtra("childrenTickets", 0);
@@ -109,9 +112,9 @@ public class RealizarPagoActivity extends AppCompatActivity {
         }
 
         if(young == 0) {
-            youngTicketString = young + " entrada con carnét joven.";
+            youngTicketString = young + " entrada con carné joven.";
         }else{
-            youngTicketString = young +" entradas con carnét joven.";
+            youngTicketString = young +" entradas con carné joven.";
 
         }
 
@@ -135,19 +138,19 @@ public class RealizarPagoActivity extends AppCompatActivity {
 
         while(adult>0){
             adult--;
-            Ticket t = new Ticket(uId, nombre_completo, movieName, "adulto", ADULT_COST, time_format);
+            Ticket t = new Ticket(uId, nombre_completo, movieName,cinema, "adulto",  ADULT_COST, time_format);
             tickets.add(t);
         }
 
         while(children>0){
             children--;
-            Ticket t = new Ticket(uId,nombre_completo, movieName, "niño", CHILDREN_COST, time_format);
+            Ticket t = new Ticket(uId,nombre_completo, movieName, "niño", cinema, CHILDREN_COST, time_format);
             tickets.add(t);
         }
 
         while(young>0){
             young--;
-            Ticket t = new Ticket(uId,nombre_completo, movieName, "joven", YOUNG_COST, time_format);
+            Ticket t = new Ticket(uId,nombre_completo, movieName, "joven", cinema, YOUNG_COST, time_format);
             tickets.add(t);
         }
     }

@@ -96,13 +96,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setUPGClient();
 
         System.out.println("CARGAR CINES");
-//        loadCinemas();
 
         System.out.println(" HOLA ?");
         System.out.println(" HOLA ?");
 
-//        Log.i("Cinemas array", cinemas_array[0] + cinemas_array[1]);
-        String [] cinemas_array2 = new String[]{"Pepe","Luis"};
 
 // Spinner de cinemas
 
@@ -246,7 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, "Searching cinemas", Toast.LENGTH_SHORT).show();
     }
 
-
+    //TO IMPROVE
     private void getMyLocation(){
         if(googleApiClient!=null) {
             if (googleApiClient.isConnected()) {
@@ -326,16 +323,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng zgz = new LatLng(41.656, -0.87734);
 
-        //mMap.addMarker(new MarkerOptions().position(aragon).title("Marker in Aragon"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(zgz));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zgz, 10.0f));
 
-//        getNearByCinemas();
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(aragon);
-//        markerOptions.title("Aragon");
-//        mMap.addMarker(markerOptions);
-//
 
     }
 

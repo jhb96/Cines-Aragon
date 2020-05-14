@@ -160,13 +160,13 @@ public class RealizarPagoActivity extends AppCompatActivity {
 
         while(children>0){
             children--;
-            Ticket t = new Ticket(uId,nombre_completo, movieName, "niño", cinema, CHILDREN_COST, time_format);
+            Ticket t = new Ticket(uId,nombre_completo, movieName, cinema,"niño", CHILDREN_COST, time_format);
             tickets.add(t);
         }
 
         while(young>0){
             young--;
-            Ticket t = new Ticket(uId,nombre_completo, movieName, "joven", cinema, YOUNG_COST, time_format);
+            Ticket t = new Ticket(uId,nombre_completo, movieName, cinema,"joven", YOUNG_COST, time_format);
             tickets.add(t);
         }
     }

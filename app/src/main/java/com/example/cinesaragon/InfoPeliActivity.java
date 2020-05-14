@@ -112,8 +112,13 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         castAdapter = new castListAdapter(this,castList);
         castLv.setAdapter(castAdapter);
 
+        if(searchMovie.clickedFromSearch){
+            item = movieObj.getMovieByID(searchMovie.jsonMoviesSearchMovie, CarteleraActivity.clickedMovie);
+            searchMovie.clickedFromSearch=false;
+        }else {
+            item = movieObj.getMovieByID(CarteleraActivity.jsonMovies, CarteleraActivity.clickedMovie);
 
-        item = movieObj.getMovieByID(CarteleraActivity.jsonMovies, CarteleraActivity.clickedMovie);
+        }
         movieName.setText(item.getTitle());
         setTitle("Información de la película");
 

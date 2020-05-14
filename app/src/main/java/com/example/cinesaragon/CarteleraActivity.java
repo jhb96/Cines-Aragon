@@ -206,6 +206,8 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.searchbutton, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -213,6 +215,11 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.search_button:
+                Intent myIntent=new Intent(this,searchMovie.class);
+                startActivity(myIntent);
+                break;
 
             case R.id.drama_movies:
                 resetVars();

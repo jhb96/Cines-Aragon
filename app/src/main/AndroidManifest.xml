@@ -29,6 +29,9 @@
         <activity android:name=".CarteleraActivity"
             android:label="CarteleraActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".searchMovie"
+            android:label="searchMovie"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".SeleccionTicketActivity" />
         <activity android:name=".ComprarEntradasActivity" />
         <activity android:name=".MapsActivity" />

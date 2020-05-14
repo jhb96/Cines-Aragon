@@ -21,9 +21,11 @@ import com.bumptech.glide.Glide;
 import com.example.cinesaragon.Adapter.castListAdapter;
 import com.example.cinesaragon.model.cast;
 import com.example.cinesaragon.model.movieObj;
+import com.example.cinesaragon.model.movieToSave;
 import com.example.cinesaragon.requestOperators.movieDetailsRequestOperator;
 import com.example.cinesaragon.requestOperators.movieRequestOperator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,16 +52,17 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
     private List<cast> castList=new ArrayList<>();
     private List<movieObj> publications = new ArrayList<>();
     private List<movieObj> recMovies=new ArrayList<>();
+    private List<movieToSave> favoriteMovies=new ArrayList<>();
 
 
     private movieObj publication, item;
 
-    private boolean gotDetails=false;
+    private boolean gotDetails=false, alreadyinFavs;
     private String imgPath,cinema, director;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbFavorites;
-
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +80,9 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
 
 
         firebaseAuth= FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
 
-        dbFavorites = FirebaseDatabase.getInstance().getReference("Favorites");
+        dbFavorites = FirebaseDatabase.getInstance().getReference("Datos de usuario").child("Favoritas");
 
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -115,7 +119,10 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         if(searchMovie.clickedFromSearch){
             item = movieObj.getMovieByID(searchMovie.jsonMoviesSearchMovie, CarteleraActivity.clickedMovie);
             searchMovie.clickedFromSearch=false;
-        }else {
+        }else if (FavoritasActivity.clickedFromFavs) {
+            item = movieObj.getMovieByID(FavoritasActivity.jsonMoviesFavs,CarteleraActivity.clickedMovie);
+            FavoritasActivity.clickedFromFavs=false;
+        }else{
             item = movieObj.getMovieByID(CarteleraActivity.jsonMovies, CarteleraActivity.clickedMovie);
 
         }
@@ -139,89 +146,95 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         buyTicketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ComprarEntradasActivity.class);
-                i.putExtra("movieName", item.getTitle());
-                i.putExtra("imageMoviePath", imgPath);
-                i.putExtra("director", director);
-                i.putExtra("cinema",cinema);
-                startActivity(i);
-
+                if(currentUser != null) {
+                    Intent i = new Intent(getApplicationContext(), ComprarEntradasActivity.class);
+                    i.putExtra("movieName", item.getTitle());
+                    i.putExtra("imageMoviePath", imgPath);
+                    i.putExtra("director", director);
+                    i.putExtra("cinema", cinema);
+                    startActivity(i);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Sólo pueden comprar entradas usuarios registrados. ¡A qué esperas! :)", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-//        addFavorites.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-//                if(isChecked){
-//                    String id=firebaseAuth.getCurrentUser().getUid();
-//
-//                    int movie_id=soonpage.clickedMovie;
-//                    List<Integer> movie_ids=new ArrayList<>();
-//
-//                    for(movieToSave movies:favoriteMovies){
-//                        if(movies.getUser_id().equals(id)){
-//                            movie_ids=movies.getMovie_id();
-//                            if(!movieToSave.hasContain(movie_ids,movie_id)){
-//                                movie_ids.add(movie_id);
-//                            }
-//                        }
-//                    }
-//
-//                    movieToSave movie=new movieToSave(id,movie_ids);
-//                    dbFavorites.child(id).setValue(movie);
-//
-//                    if(!alreadyinFavs){
-//                        /* MediaPlayer mpFa = MediaPlayer.create(getApplicationContext(),R.raw.fillingyourinbox);
-//                         mpFa.start();*/
-//                        Toast.makeText(getApplicationContext(), "Movie has been added to your favorites.",Toast.LENGTH_SHORT).show();
-//                        //mpFa.seekTo(0);
-//                    }
-//                }else{
-//                    String id=firebaseAuth.getCurrentUser().getUid();
-//
-//                    int movie_id=soonpage.clickedMovie;
-//                    List<Integer> movie_ids=new ArrayList<>();
-//
-//                    for(movieToSave movies:favoriteMovies){
-//                        if(movies.getUser_id().equals(id)){
-//                            movie_ids=movies.getMovie_id();
-//                            movie_ids=movieToSave.removeItem(movie_ids,movie_id);
-//                        }
-//                    }
-//
-//                    movieToSave movie=new movieToSave(id,movie_ids);
-//                    dbFavorites.child(id).setValue(movie);
-//
-//                     /*MediaPlayer mpFr = MediaPlayer.create(getApplicationContext(),R.raw.caseclosed);
-//                     mpFr.start();*/
-//                    Toast.makeText(getApplicationContext(), "Movie has been removed from your favorites.",Toast.LENGTH_SHORT).show();
-//                    //mpFr.seekTo(0);
-//                }
-//            }
-//        }
+    if (currentUser!=null){
+        addFavorites.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked){
+                    String id=firebaseAuth.getCurrentUser().getUid();
+
+                    int movie_id=CarteleraActivity.clickedMovie;
+                    List<Integer> movie_ids = new ArrayList<>();
+
+                    for(movieToSave movies:favoriteMovies){
+                        if(movies.getUser_id().equals(id)){
+                            movie_ids=movies.getMovie_id();
+                            if(!movieToSave.hasContain(movie_ids, movie_id)){
+                                movie_ids.add(movie_id);
+                            }
+                        }
+                    }
+
+                    movieToSave movie=new movieToSave(id,movie_ids);
+                    dbFavorites.child(id).setValue(movie);
+
+                    if(!alreadyinFavs){
+                        /* MediaPlayer mpFa = MediaPlayer.create(getApplicationContext(),R.raw.fillingyourinbox);
+                         mpFa.start();*/
+                        Toast.makeText(getApplicationContext(), "Movie has been added to your favorites.", Toast.LENGTH_SHORT).show();
+                        //mpFa.seekTo(0);
+                    }
+                }else{
+                    String id = firebaseAuth.getCurrentUser().getUid();
+
+                    int movie_id = CarteleraActivity.clickedMovie;
+                    List<Integer> movie_ids=new ArrayList<>();
+
+                    for(movieToSave movies:favoriteMovies){
+                        if(movies.getUser_id().equals(id)){
+                            movie_ids=movies.getMovie_id();
+                            movie_ids = movieToSave.removeItem(movie_ids,movie_id);
+                        }
+                    }
+
+                    movieToSave movie = new movieToSave(id, movie_ids);
+                    dbFavorites.child(id).setValue(movie);
+
+                     /*MediaPlayer mpFr = MediaPlayer.create(getApplicationContext(),R.raw.caseclosed);
+                     mpFr.start();*/
+                    Toast.makeText(getApplicationContext(), "Movie has been removed from your favorites.",Toast.LENGTH_SHORT).show();
+                    //mpFr.seekTo(0);
+                }
+            }
+        });
 
 
-//        dbFavorites.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                favoriteMovies.clear();
-//                for(DataSnapshot usersSnapShot : dataSnapshot.getChildren()){
-//                    if(usersSnapShot.getValue(movieToSave.class).getUser_id().equals(firebaseAuth.getCurrentUser().getUid())){
-//                        favoriteMovies.add(usersSnapShot.getValue(movieToSave.class));
-//                        if(movieToSave.hasContain(usersSnapShot.getValue(movieToSave.class).getMovie_id(),soonpage.clickedMovie)){
-//                            alreadyinFavs =true;
-//                            addFavorites.setChecked(true);
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
+
+        dbFavorites.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                favoriteMovies.clear();
+                for(DataSnapshot usersSnapShot : dataSnapshot.getChildren()){
+                    if(usersSnapShot.getValue(movieToSave.class).getUser_id().equals(firebaseAuth.getCurrentUser().getUid())){
+                        favoriteMovies.add(usersSnapShot.getValue(movieToSave.class));
+                        if(movieToSave.hasContain(usersSnapShot.getValue(movieToSave.class).getMovie_id(),CarteleraActivity.clickedMovie)){
+                            alreadyinFavs =true;
+                            addFavorites.setChecked(true);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        }
     }
 
 

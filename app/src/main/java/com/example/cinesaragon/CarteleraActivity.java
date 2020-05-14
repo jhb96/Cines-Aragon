@@ -279,25 +279,6 @@ public class CarteleraActivity extends AppCompatActivity  implements movieReques
         return super.onOptionsItemSelected(item);
     }
 
-//    public void filterByGenre(){
-//        runOnUiThread(new Runnable() {
-//          @Override
-//          public void run() {
-//              List < movieObj > list_filtered = new ArrayList<>();
-//              System.out.println("Size" + jsonMovies.size());
-//              for (movieObj movie : jsonMovies){
-//                  for(int i =0; i< movie.getGenres().size(); i++){
-//                      if(movie.getGenres().get(i).getTitle() == "Drama"){
-//                          list_filtered.add(movie);
-//                      }
-//                  }
-//              }
-//              jsonMovies.clear();
-//              addListItemToAdapter(list_filtered);
-//          }
-//      });
-//
-//    }
 
 
 

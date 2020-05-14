@@ -86,9 +86,12 @@ public class PerfilActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Perfil p = dataSnapshot.child(currentUser.getUid()).getValue(Perfil.class);
                 System.out.println(p);
-                nombreText.setText(p.getNombre());
-                apellidosText.setText(p.getApellidos());
+                try{
+                    nombreText.setText(p.getNombre());
+                    apellidosText.setText(p.getApellidos());
+                } catch (Exception e){
 
+                }
             }
 
             @Override

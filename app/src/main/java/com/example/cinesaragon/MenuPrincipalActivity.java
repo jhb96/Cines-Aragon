@@ -39,6 +39,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
     private TextView userEmail;
     private DrawerLayout drawer;
     private Button button;
+    private NavigationView navigationView;
 
     public static final String PELICULA_NAME ="com.example.thang.assignment2_ticketbuy_SHOWTIME";
     public static List<Pelicula> jsonMovies = new ArrayList<>();
@@ -66,11 +67,11 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        System.out.println("Email" + currentUser.getEmail());
         if(currentUser != null) {
             userEmail.setText(currentUser.getEmail());
         } else {
             userEmail.setText("Usuario invitado");
+            hideItems();
 
         }
 
@@ -86,6 +87,16 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    }
+
+    private void hideItems(){
+
+        navigationView = findViewById(R.id.nav_view);
+        Menu nav_menu = navigationView.getMenu();
+        nav_menu.findItem(R.id.nav_perfil).setVisible(false);
+        nav_menu.findItem(R.id.nav_favoritas).setVisible(false);
+        nav_menu.findItem(R.id.nav_logout).setVisible(false);
+        nav_menu.findItem(R.id.nav_misentradas).setVisible(false);
     }
 
     @Override
@@ -107,7 +118,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
                 break;
 
             case R.id.nav_favoritas:
-                i = new Intent(this, MisEntradasActivity.class);
+                i = new Intent(this, FavoritasActivity.class);
                 startActivity(i);
                 break;
 

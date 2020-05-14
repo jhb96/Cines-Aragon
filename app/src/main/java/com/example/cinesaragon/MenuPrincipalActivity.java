@@ -59,6 +59,7 @@ public class MenuPrincipalActivity extends AppCompatActivity implements Navigati
         View header = navigationView.getHeaderView(0);
         userEmail = header.findViewById(R.id.userEmail);
 
+        setTitle("Menú Principal");
 
         setToolbar();
 

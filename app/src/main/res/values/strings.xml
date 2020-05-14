@@ -32,6 +32,11 @@
     <string name="thriller_movie_filter">Thriller</string>
 
 
+    <string name="user_perfil">Datos del usuario</string>
+    <string name="user_perfil_button">Guardar</string>
+
+
+
     <string-array name="ticketQuantity">
         <item>1</item>
         <item>2</item>

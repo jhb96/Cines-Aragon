@@ -42,6 +42,7 @@ public class RealizarPagoActivity extends AppCompatActivity {
     private List<Ticket> tickets;
 
     private FirebaseDatabase db;
+    private FirebaseUser currentUser;
 
 
     @Override
@@ -92,6 +93,21 @@ public class RealizarPagoActivity extends AppCompatActivity {
         young = i.getIntExtra("youngTickets", 0);
         cost = ADULT_COST * adult + CHILDREN_COST*children + YOUNG_COST * young;
         movieName = i.getStringExtra("movieName");
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            email.setText(currentUser.getEmail());
+
+            if(PerfilActivity.nombre != null){
+                name.setText(PerfilActivity.nombre);
+            }
+
+             if(PerfilActivity.apellidos != null){
+                surname.setText(PerfilActivity.apellidos);
+            }
+
+
+        }
 
         String adultTicketString;
         String childrenTicketString;

@@ -11,8 +11,12 @@ import com.example.cinesaragon.model.Perfil;
 import com.example.cinesaragon.model.Ticket;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 
@@ -73,6 +77,27 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void loadDataFb(){
+
+      db = FirebaseDatabase.getInstance();
+      dbRef = db.getReference("Datos de usuario").child("Perfil");
+      Query q = dbRef.equalTo(currentUser.getUid());
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Perfil p = dataSnapshot.child(currentUser.getUid()).getValue(Perfil.class);
+                System.out.println(p);
+                nombreText.setText(p.getNombre());
+                apellidosText.setText(p.getApellidos());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        });
+
+
         //TODO
         //TO GET THE NAME AND SURNAME IF EXISTS
     }

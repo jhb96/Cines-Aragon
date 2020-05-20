@@ -3,5 +3,5 @@ App para Android, aún en desarrollo, para acceder a la cartelera e historial de
 
 ## View Movies
 ![Image description](https://github.com/jhb96/Cines-Aragon/blob/master/documentos/maps.jpg){:height="50%" width="50%"}
-![Image description](https://github.com/jhb96/Cines-Aragon/blob/master/documentos/pelicula.jpg){:height="50%" width="50%"}
-![Image description](https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cartelera.jpg){:height="50%" width="50%"}
+<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/maps.jpg" width="100" height="100">
+

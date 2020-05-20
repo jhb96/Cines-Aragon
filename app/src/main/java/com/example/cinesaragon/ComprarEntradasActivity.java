@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -169,7 +168,6 @@ public class ComprarEntradasActivity extends AppCompatActivity {
                     spinner1.setEnabled(true); //enable spinner if check box is checked
                 else
                     spinner1.setEnabled(false);
-                    spinner1.resetPivot();
                 break;
             case R.id.children:
                 if (checked)

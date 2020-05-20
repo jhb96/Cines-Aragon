@@ -1,11 +1,8 @@
 package com.example.cinesaragon;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +17,6 @@ import android.widget.ListView;
 import com.example.cinesaragon.Adapter.movieListAdapterMainPage;
 import com.example.cinesaragon.model.movieObj;
 import com.example.cinesaragon.requestOperators.movieRequestOperator;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;

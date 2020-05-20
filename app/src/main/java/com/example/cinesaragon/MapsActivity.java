@@ -10,7 +10,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,16 +39,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -60,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayAdapter<String> spinnerArrayAdapter;
 
     private GoogleMap mMap;
+    public static FirebaseDatabase db;
     GoogleApiClient googleApiClient;
     private Marker currentUserLocationMarker;
     private int ProximityRadius = 1000;
@@ -77,6 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //  public static HashMap<String, String> cinemas;
     public static List<Cine> cinemas;
     public static String[] cinemas_array;
+    private String cinemas_loaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +92,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         setUPGClient();
 
-        System.out.println("CARGAR CINES");
-
-        System.out.println(" HOLA ?");
-        System.out.println(" HOLA ?");
 
 
 // Spinner de cinemas
@@ -145,10 +138,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
     }
 
+
     public static void loadCinemas(){
-        final FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = db.getReference("Cines");
         cinemas = new ArrayList<>();
+        System.out.println("Veamos");
 
         // Attach a listener to read the data at our posts reference
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {

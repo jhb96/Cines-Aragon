@@ -1,6 +1,5 @@
 package com.example.cinesaragon;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -75,9 +74,6 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         setToolbar();
 
 
-//        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(myToolbar);
-
 
         firebaseAuth= FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -100,15 +96,6 @@ public class InfoPeliActivity extends AppCompatActivity implements movieDetailsR
         moviePoster=(ImageView) findViewById(R.id.movieDetailPoster);
         castLv=(ListView) findViewById(R.id.castListView);
         buyTicketButton = (Button) findViewById(R.id.buyTicket_button);
-//        watchTrailer=(Button) findViewById(R.id.watchTrailer);
-
-
-//        watchTrailer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                watchYoutubeVideo(publication.getVideoList().get(0).getKey());
-//            }
-//        });
 
         Intent i = getIntent();
         cinema = i.getStringExtra("cinema");

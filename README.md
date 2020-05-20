@@ -1,17 +1,21 @@
 ![Cines Aragón](https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cines%20aragon.png)
 
 
-App para Android, aún en desarrollo, para acceder a la cartelera e historial de películas y simular la compra de una entrada. Utiliza tecnologías de almacenamiento como Firebase, API REST con Google Maps/Place API, Location, además de otros servicios.
-Vídeo-Demo: https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cines_aragon%5B1%5D.mp4
+Cines Aragón es una app, aún en desarrollo, para Android, que permite acceder a la cartelera de los distintos cines de Aragón, además de que simula la compra de entradas y su almacenamiento en la app, para fácil acceso de un usuario.
+**Vídeo-Demo**: https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cines_aragon%5B1%5D.mp4
 
 ## Algunas pantallas
 
 ### Información de película
-<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/pelicula.jpg" width="400" height="500">
+Accede a toda la información de una película!
+<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/pelicula.jpg" width="200" height="600">
 
 ### Cartelera
-<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cartelera.jpg" width="400" height="600">
+Accede a la cartelera de los cines actuales, filtra películas por género o incluso busca tu película favorita!
+<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cartelera.jpg" width="200" height="500">
 
 ### Selección de cine
-<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/maps.jpg" width="500" height="700">
+Encuentra tu cine más cercano en el Maps! 
+<img src="https://github.com/jhb96/Cines-Aragon/blob/master/documentos/maps.jpg" width="200" height="400">
+
 

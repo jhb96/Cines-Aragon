@@ -5,7 +5,7 @@ Cines Aragón es una app, aún en desarrollo(v1.1), para Android, que permite ac
 **Vídeo-Demo**: https://github.com/jhb96/Cines-Aragon/blob/master/documentos/cines_aragon%5B1%5D.mp4<br/>
 **Competencias**: REST API, JSON, JAVA, Android Application.<br/>
 **Tecnologías**: Google Maps API, Places API, FirebaseDB, TheMovieDB...<br/>
-
+<span style="color:#ff0000;">Requiere Wifi</span>
 <br/>
 <br/>
 
